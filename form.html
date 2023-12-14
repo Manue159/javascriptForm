@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container" >
+        <div class="">
+            <div class="login-box" id="form">
+                <h2>Ajouter une personne</h2>
+                <form>
+                    <div class="user-box">
+                        <input type="text" id="nom" required>
+                        <label>Nom</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" id="prenom" required>
+                        <label>Prenom</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="text" id="age" required>
+                        <label>Age</label>
+                    </div>
+                    <a href="#" onclick="add()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Submit
+                    </a>
+                </form>
+            </div>
+        </div>
+        <div class="row" id="table" style="display: none;">
+            <table class="table-fill" >
+                <thead>
+                    <tr>
+                        <th class="text-left">Nom</th>
+                        <th class="text-left">Prénom</th>
+                        <th class="text-left">Age</th>
+                        <th class="text-left">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function add(){
+            let id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+            console.log(id);
+            let table = document.getElementById('table');
+            table.style.display = "block";
+            let form = document.getElementById('form');
+            form.style.left = "20%";
+
+            let nom = document.getElementById('nom').value;
+            let prenom = document.getElementById('prenom').value;
+            let age = document.getElementById('age').value;
+
+            let tbody = document.getElementById('tbody');
+            let tr = document.createElement('tr');
+            let tdNom = document.createElement('td');
+            let tdPrenom = document.createElement('td');
+            let tdAge = document.createElement('td');
+            let tdAction = document.createElement('td');
+            
+            tbody.appendChild(tr);
+
+            tr.appendChild(tdNom);
+            tr.appendChild(tdPrenom);
+            tr.appendChild(tdAge); 
+            tr.appendChild(tdAction); 
+            tr.setAttribute("id", id);
+
+            tdNom.innerHTML = nom;
+            tdNom.classList.add('text-left');
+            tdPrenom.innerHTML = prenom;
+            tdPrenom.classList.add('text-left');
+            tdAge.innerHTML = age;
+            tdAge.classList.add('text-left');
+            tdAction.innerHTML = '<button class="btn btn-dark">Supprimer</button>';
+            tdAction.classList.add('text-center');
+            
+            tdAction.addEventListener('click', function () {
+                let elementToDelete = tdAction.parentElement;
+                elementToDelete.remove();
+            });
+        }
+    </script>
+</body>
+</html>
